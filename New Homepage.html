@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Virtual Hiking Experience</title>
+  <link rel="stylesheet" href="CSS New.css">
+
+  <style>
+    .audio-toggle {
+      position: absolute;
+      top: 90px;
+      right: 30px;
+      background: rgba(0,0,0,0.6);
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      z-index: 1000;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ================= NAVIGATION ================= -->
+<header>
+  <div class="logo">
+    <img src="virtual-reality.png" class="logo-icon">
+    VirtAZ
+  </div>
+  <nav>
+    <ul>
+      <li><a href="#home" id="nav-home">Home</a></li>
+      <li><a href="#about" id="nav-about">About</a></li>
+      <li><a href="#vr" id="nav-vr">VR Experience</a></li>
+      <li><a href="#contact" id="nav-contact">Contact</a></li>
+      <li><a href="#" id="lang-toggle">BM</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- ================= HERO SECTION ================= -->
+<section id="home" class="hero">
+  <video autoplay muted loop id="bg-video">
+    <source src="BG BARU.mp4" type="video/mp4">
+  </video>
+
+  <div class="overlay"></div>
+
+  <!-- ===== VOICEOVER ===== -->
+  <audio id="voiceover" preload="auto">
+    <source id="voiceSource" src="" type="audio/mpeg">
+  </audio>
+
+  <button class="audio-toggle" onclick="toggleAudio()">🔊 Mute</button>
+
+  <div class="hero-content">
+    <h1 id="hero-title">Virtual Hiking Experience :</h1>
+    <h2 id="hero-subtitle">Discover Labuan Trails in VR</h2>
+    <p id="hero-desc">
+      Step into the 3D world of Labuan’s Chimney Trail through an immersive VR experience.
+      Explore nature and heritage using VR technology!
+    </p>
+
+    <a href="Checkpoint.html" class="start-button" onclick="stopVoiceover()">
+      <img src="play.png" class="start-icon">
+    </a>
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section id="about" class="about">
+  <h2 id="about-title">About Project</h2>
+  <p id="about-p1">
+    Step into a new world of adventure with
+    <strong>Virtual Hiking Experience: Discover Labuan Chimney Trails in VR.</strong>
+  </p>
+  <p id="about-p2">
+    This immersive project transforms traditional hiking into a breathtaking virtual reality experience.
+  </p>
+</section>
+
+<!-- ================= VR SECTION ================= -->
+<section id="vr" class="vr">
+  <h2 id="vr-title">Explore in VR</h2>
+  <p id="vr-desc">
+    Experience the 3D environment of the Chimney Trail in Labuan.
+  </p>
+  <a href="Checkpoint.html" class="btn" id="vr-btn" onclick="stopVoiceover()">Start Hiking!</a>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact" class="contact">
+  <h2 id="contact-title">Contact</h2>
+  <p id="contact-desc">For inquiries or collaboration, feel free to reach out :</p>
+</section>
+
+<footer>
+  <p id="footer-text">© 2025 Virtual Labuan Chimney Trail Hiking Experience by VirtAZ</p>
+</footer>
+
+<!-- ================= SCRIPT ================= -->
+<script>
+  const audio = document.getElementById("voiceover");
+  const audioSource = document.getElementById("voiceSource");
+  const toggleBtn = document.querySelector(".audio-toggle");
+  const langToggle = document.getElementById("lang-toggle");
+
+  let isEnglish = true;
+
+  // autoplay sekali sahaja
+  document.addEventListener("DOMContentLoaded", () => {
+    audio.play().catch(() => {});
+  });
+
+  function toggleAudio() {
+    audio.muted = !audio.muted;
+    toggleBtn.textContent = audio.muted ? "🔇 Unmute" : "🔊 Mute";
+  }
+
+  function stopVoiceover() {
+    audio.pause();
+    audio.currentTime = 0;
+  }
+
+  langToggle.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    audio.pause();
+    audio.currentTime = 0;
+
+    if (isEnglish) {
+      // BM
+      document.getElementById('nav-home').textContent = 'Laman Utama';
+      document.getElementById('nav-about').textContent = 'Tentang';
+      document.getElementById('nav-vr').textContent = 'Pengalaman VR';
+      document.getElementById('nav-contact').textContent = 'Hubungi';
+      document.getElementById('hero-title').textContent = 'Pengalaman Mendaki Maya :';
+      document.getElementById('hero-subtitle').textContent = 'Terokai Laluan Labuan dalam VR';
+      document.getElementById('hero-desc').textContent =
+        'Klik butang mula untuk memulakan perjalanan maya anda.';
+      document.getElementById('about-title').textContent = 'Tentang Projek';
+      document.getElementById('vr-title').textContent = 'Terokai dalam VR';
+      document.getElementById('vr-btn').textContent = 'Mula Mendaki!';
+      document.getElementById('footer-text').textContent =
+        '© 2025 Pengalaman Mendaki Maya Laluan Chimney Labuan oleh VirtAZ';
+
+      audioSource.src = "Homepage_Bm_aina.mp3";
+      langToggle.textContent = "EN";
+      isEnglish = false;
+    } else {
+      // EN
+      document.getElementById('nav-home').textContent = 'Home';
+      document.getElementById('nav-about').textContent = 'About';
+      document.getElementById('nav-vr').textContent = 'VR Experience';
+      document.getElementById('nav-contact').textContent = 'Contact';
+      document.getElementById('hero-title').textContent = 'Virtual Hiking Experience :';
+      document.getElementById('hero-subtitle').textContent = 'Discover Labuan Trails in VR';
+      document.getElementById('hero-desc').textContent =
+        'Click Start to begin your virtual journey.';
+      document.getElementById('about-title').textContent = 'About Project';
+      document.getElementById('vr-title').textContent = 'Explore in VR';
+      document.getElementById('vr-btn').textContent = 'Start Hiking!';
+      document.getElementById('footer-text').textContent =
+        '© 2025 Virtual Labuan Chimney Trail Hiking Experience by VirtAZ';
+
+      audioSource.src = "Homepage_English_aina.mp3";
+      langToggle.textContent = "BM";
+      isEnglish = true;
+    }
+
+    audio.load();
+    if (!audio.muted) audio.play().catch(() => {});
+  });
+</script>
+
+</body>
+</html>
